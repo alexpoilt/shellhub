@@ -104,20 +104,31 @@
           </template>
 
           <template v-slot:item.actions="{ item }">
-            <v-icon
-              class="icons"
-              @click="detailsSession(item)"
-            >
-              info
-            </v-icon>
-
-            <v-icon
-              v-if="item.active"
-              class="icons ml-1"
-              @click="closeSession(item)"
-            >
-              mdi-close-circle
-            </v-icon>
+            <v-tooltip bottom>
+              <template #activator="{ on }">
+                <v-icon
+                  class="icons"
+                  v-on="on"
+                  @click="detailsSession(item)"
+                >
+                  info
+                </v-icon>
+              </template>
+              <span>Details</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+              <template #activator="{ on }">
+                <v-icon
+                  v-if="item.active"
+                  class="icons ml-1"
+                  v-on="on"
+                  @click="closeSession(item)"
+                >
+                  mdi-close-circle
+                </v-icon>
+              </template>
+              <span>Delete</span>
+            </v-tooltip>
           </template>
         </v-data-table>
       </v-card-text>

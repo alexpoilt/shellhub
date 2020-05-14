@@ -98,21 +98,35 @@
           </template>
 
           <template v-slot:item.actions="{ item }">
-            <v-icon
-              class="icons"
-              @click="detailsDevice(item)"
-            >
-              info
-            </v-icon>
-
+            <v-tooltip bottom>
+              <template #activator="{ on }">
+                <v-icon
+                  class="icons"
+                  v-on="on"
+                  @click="detailsDevice(item)"
+                >
+                  info
+                </v-icon>
+              </template>
+              <span>Details</span>
+            </v-tooltip>
+        
             <TerminalDialog
               v-if="item.online"
               :uid="item.uid"
             />
 
-            <v-icon @click="remove(item.uid)">
-              delete
-            </v-icon>
+            <v-tooltip bottom>
+              <template #activator="{ on }">
+                <v-icon
+                  v-on="on"
+                  @click="remove(item.uid)"
+                >
+                  delete
+                </v-icon>
+              </template>
+              <span>Delete</span>
+            </v-tooltip>
           </template>
         </v-data-table>
       </v-card-text>

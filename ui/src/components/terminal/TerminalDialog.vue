@@ -3,12 +3,18 @@
     v-model="show"
     max-width="1024px"
   >
-    <template v-slot:activator="{ on }">
-      <v-icon @click="open()">
-        mdi-console
-      </v-icon>
-    </template>
-  
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-icon
+          @click="open()"
+          v-on="on"
+        >
+          mdi-console
+        </v-icon>
+      </template>
+      <span>Terminal</span>
+    </v-tooltip>
+
     <v-card>
       <v-toolbar
         dark
