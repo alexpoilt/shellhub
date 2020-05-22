@@ -69,7 +69,7 @@ jobs:
       run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
 
     - name: Publish to Registry
-      if: matrix.project != 'pkg'
+      if: matrix.project != 'pkg' || matrix.project != 'agent'
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: gomex/${{ matrix.project }}
