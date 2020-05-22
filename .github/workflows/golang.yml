@@ -74,7 +74,8 @@ jobs:
         name: gomex/${{ matrix.project }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "latest,${{ env.RELEASE_VERSION }}"
+        #tags: "latest,${{ env.RELEASE_VERSION }}"
+        tags: "latest"
         snapshot: true
         dockerfile: ${{ matrix.project }}/Dockerfile
 
