@@ -65,7 +65,7 @@ jobs:
       uses: HurricanKai/Publish-Docker-Github-Action@master
       if: contains(github.ref, 'refs/tags/v')
       with:
-        name: myDocker/repository
+        name: gomex/${{ matrix.project }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tagging: true
