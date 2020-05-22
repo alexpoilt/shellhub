@@ -19,6 +19,7 @@ jobs:
     name: build-tag-push
 
     strategy:
+      fail-fast: false
       matrix:
         project: [ api,  agent,  pkg,  ssh ]
 
