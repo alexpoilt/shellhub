@@ -13,8 +13,8 @@ on:
 
 jobs:
 
-  build:
-    name: Build
+  build-tag-push:
+    name: build-tag-push
 
     strategy:
       matrix:
@@ -51,22 +51,25 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build
-      working-directory: ${{ matrix.project }}
-      run: go build -v ./...
-
-    - name: Build (with docker tag)
-      if: matrix.project == 'agent'
-      working-directory: ${{ matrix.project }}
-      run: go build -tags docker -v ./...
-
     - name: Test
       working-directory: ${{ matrix.project }}
       run: go test -v ./...
-
+    
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    - name: Publish to Registry
+      uses: HurricanKai/Publish-Docker-Github-Action@master
+      if: contains(github.ref, 'refs/tags/v')
+      with:
+        name: myDocker/repository
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        tagging: true
+        snapshot: true
+        dockerfile: ${{ matrix.project }}/Dockerfile
+        cache: true
 
