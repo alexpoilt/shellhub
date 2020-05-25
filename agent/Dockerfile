@@ -34,7 +34,7 @@ RUN go build -tags docker -ldflags "-X main.AgentVersion=${SHELLHUB_VERSION}"
 # development stage
 FROM base AS development
 
-RUN apk add --update openssl openssh-client
+RUN apk add --no-cache openssl openssh-client
 RUN go get github.com/markbates/refresh && go get github.com/mgechev/revive
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub

@@ -1,7 +1,7 @@
 # base stage
 FROM golang:1.13-alpine3.11 AS base
 
-RUN apk add --update git ca-certificates openssh-client
+RUN apk add --no-cache git ca-certificates openssh-client
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
 
@@ -30,7 +30,7 @@ RUN go build -tags internal_api
 # development stage
 FROM base AS development
 
-RUN apk add --update openssl
+RUN apk add --no-cache openssl
 RUN go get github.com/markbates/refresh && go get github.com/mgechev/revive
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
@@ -47,7 +47,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 # production stage
 FROM alpine:3.11 AS production
 
-RUN apk add --update openssh-client
+RUN apk add --no-cache openssh-client
 
 COPY --from=builder /go/src/github.com/shellhub-io/shellhub/ssh/ssh /ssh
 

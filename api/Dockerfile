@@ -1,7 +1,7 @@
 # base stage
 FROM golang:1.13-alpine3.11 AS base
 
-RUN apk add --update git ca-certificates
+RUN apk add --no-cache git ca-certificates
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
 
@@ -30,7 +30,7 @@ RUN go build
 # development stage
 FROM base AS development
 
-RUN apk add --update openssl
+RUN apk add --no-cache openssl
 RUN go get github.com/markbates/refresh && go get github.com/mgechev/revive
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
