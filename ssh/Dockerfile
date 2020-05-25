@@ -30,7 +30,7 @@ RUN go build -tags internal_api
 # development stage
 FROM base AS development
 
-RUN apk add --update openssl
+RUN apk add --no-cache openssl
 RUN go get github.com/markbates/refresh && go get github.com/mgechev/revive
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
