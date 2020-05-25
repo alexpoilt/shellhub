@@ -1,7 +1,7 @@
 # base stage
 FROM golang:1.13-alpine3.11 AS base
 
-RUN apk add --update git ca-certificates openssh-client
+RUN apk add --no-cache git ca-certificates openssh-client
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
 
