@@ -4,7 +4,7 @@ FROM arm32v6/golang:1.13-alpine3.11
 
 ARG SHELLHUB_VERSION=latest
 
-RUN apk add --update git ca-certificates util-linux build-base bash
+RUN apk add --no-cache git ca-certificates util-linux build-base bash
 
 WORKDIR $GOPATH/src/github.com/shellhub-io/shellhub
 
