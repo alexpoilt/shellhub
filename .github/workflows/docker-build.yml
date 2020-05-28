@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [ api,  agent, ssh ]
+        project: [ api, ssh ]
 
     runs-on: ubuntu-latest
 
