@@ -30,6 +30,7 @@ RUN go build
 # development stage
 FROM base AS development
 
+
 RUN apk add --no-cache openssl
 RUN go get github.com/markbates/refresh && go get github.com/mgechev/revive
 
